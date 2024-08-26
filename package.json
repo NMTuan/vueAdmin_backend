@@ -8,5 +8,9 @@
   },
   "devDependencies": {
     "nitropack": "latest"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "jsonwebtoken": "^9.0.2"
   }
 }
