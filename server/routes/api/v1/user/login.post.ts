@@ -17,14 +17,9 @@ export default defineEventHandler(async (event) => {
             message: "用户名或密码不能为空",
         });
     }
-    const user = {
-        id: "123456",
-        name: "nick",
-    };
     const token = await generateToken(user.id);
     console.log('token', token);
     return rs({
-        user,
         token,
     });
 });
