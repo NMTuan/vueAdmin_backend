@@ -2,10 +2,10 @@
  * @Author: NMTuan
  * @Email: NMTuan@qq.com
  * @Date: 2024-02-08 21:06:56
- * @LastEditTime: 2024-08-20 17:42:44
+ * @LastEditTime: 2024-08-29 16:26:46
  * @LastEditors: nmtuan nmtuan@qq.com
  * @Description:
- * @FilePath: \myMemo\server\utils\rs.ts
+ * @FilePath: \vueAdmin_backend\server\utils\rs.ts
  */
 
 // 定义消息接口
@@ -22,48 +22,47 @@ interface Result<T> {
     timestamp: number
 }
 
-// 定义状态码枚举
-enum StatusCode {
-    OK = 200,
-    NOT_FOUND = 404,
-    // 添加其他状态码...
-}
-
 // 定义消息列表
-const messages: Record<StatusCode, string> = {
-    [StatusCode.OK]: '',
-    [StatusCode.NOT_FOUND]: 'Not Found',
-    // 添加其他消息...
-}
+const messages: Message[] = [
+    { code: 200, message: '' },
+    { code: 404, message: 'Not Found' }
+]
 
 // 定义 rs 函数
 export function rs<T>(
-    codeOrData: StatusCode | T,
-    messageOrData?: string | T,
+    code: number | string | T,
+    message?: string | T,
     data?: T
 ): Result<T> {
-    let code: StatusCode = StatusCode.OK;
-    let message: string = '';
-    let resultData: T = {} as T;
+    // 默认参数
+    const defaultCode = 200
+    const defaultMessage = ''
+    const defaultData: T = {} as T
 
-    if (typeof codeOrData === 'number') {
-        code = codeOrData;
-        if (typeof messageOrData === 'string') {
-            message = messageOrData;
-            resultData = data || {} as T;
-        } else {
-            resultData = messageOrData as T || {} as T;
-        }
-    } else {
-        resultData = codeOrData;
+    // 参数处理
+    if (arguments.length === 1) {
+        // 只有一个参数，则认为是 data
+        data = code as T
+        code = defaultCode
+        message = defaultMessage
+    } else if (arguments.length === 2 && typeof code === 'string') {
+        // 只有两个参数，并且第一个参数数据类型为 string 则认为是 message 和 data
+        data = message as T
+        message = code
+        code = defaultCode
     }
 
-    message = messages[code as StatusCode] ?? message ?? '';
+    // 查找对应消息
+    message =
+        messages.find((item) => item.code === code)?.message ||
+        message ||
+        defaultMessage
 
+    // 返回结果
     return {
         code,
         message,
-        data: resultData,
+        data: data || defaultData,
         timestamp: Date.now()
     }
 }

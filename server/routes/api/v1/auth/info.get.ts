@@ -2,8 +2,8 @@
  * @Author: nmtuan nmtuan@qq.com
  * @Date: 2024-08-25 23:11:04
  * @LastEditors: nmtuan nmtuan@qq.com
- * @LastEditTime: 2024-08-28 10:53:48
- * @FilePath: \vueAdmin_backend\server\routes\api\v1\user\info.get.ts
+ * @LastEditTime: 2024-08-29 21:19:39
+ * @FilePath: \vueAdmin_backend\server\routes\api\v1\auth\info.get.ts
  * @Description:
  *
  * Copyright (c) 2024 by nmtuan@qq.com, All Rights Reserved.
@@ -31,6 +31,7 @@ export default defineAuthEventHandler(() => {
                         component: "dataTable",
                         // fetchUrl: '/user/info',
                         // fetchType: 'get',
+                        // autoFetch: true,
                         // props: {
                         //     highlightCurrentRow: true,
                         // },
@@ -39,6 +40,7 @@ export default defineAuthEventHandler(() => {
                                 key: "create",
                                 label: "创建",
                                 icon: "ri-add-circle-line",
+                                showType: 'slideover',
                                 component: "form",
                                 positions: ["top"],
                                 props: {
@@ -50,28 +52,45 @@ export default defineAuthEventHandler(() => {
                                 label: "编辑",
                                 icon: "ri-edit-line",
                                 component: "form",
+                                // showType: 'modal',  // slideover
+                                showTypeProps: {
+                                    // title: 'showType的title，空则显示空，无则显示label',
+                                    // width: 200
+                                },
+                                // fetchUrl: '',
+                                // fetchType: '',
+                                // submitUrl: '123',
+                                query: ["id"],
+                                params: { a: 1, b: 2 },
                                 positions: ["top", "row"],
-                                a: 1,
-                                // TODO 操作按钮的禁用条件
-                                // disabled: [
-                                //     {
-                                //         row: {
-                                //             eq: 1,
-                                //         },
-                                //     },
-                                //     {
-                                //         rows: {
-                                //             lt: 1
-                                //         }
-                                //     }
-                                // ],
+                                disabled: {
+                                    top: { $lte: 0 },
+                                },
                             },
                             {
                                 key: "delete",
                                 label: "删除",
                                 icon: "ri-close-circle-line",
-                                component: "form",
-                                positions: ["row"],
+                                component: "confirm",
+                                // 这个配置不符合直觉
+                                confirmProps: {
+                                    // title: "确认删除吗?",
+                                    // message: "删除后无法恢复",
+                                },
+                                query: ["id"],
+                                positions: ["top", "row"],
+                                disabled: {
+                                    // top 按照选中数量去处理
+                                    top: {
+                                        $lte: 1,
+                                    },
+                                    // row 按照当前行关键字去处理
+                                    row: {
+                                        // and
+                                        id: { $eq: "aaa" },
+                                        name: { $eq: "22" },
+                                    },
+                                },
                                 props: {
                                     type: "danger",
                                     plain: true,
