@@ -2,7 +2,7 @@
  * @Author: nmtuan nmtuan@qq.com
  * @Date: 2024-08-25 23:11:04
  * @LastEditors: nmtuan nmtuan@qq.com
- * @LastEditTime: 2024-08-29 21:19:39
+ * @LastEditTime: 2024-09-06 05:54:00
  * @FilePath: \vueAdmin_backend\server\routes\api\v1\auth\info.get.ts
  * @Description:
  *
@@ -35,86 +35,86 @@ export default defineAuthEventHandler(() => {
                         // props: {
                         //     highlightCurrentRow: true,
                         // },
-                        actions: [
-                            {
-                                key: "create",
-                                label: "创建",
-                                icon: "ri-add-circle-line",
-                                showType: 'slideover',
-                                component: "form",
-                                positions: ["top"],
-                                props: {
-                                    type: "primary",
-                                },
-                            },
-                            {
-                                key: "edit",
-                                label: "编辑",
-                                icon: "ri-edit-line",
-                                component: "form",
-                                // showType: 'modal',  // slideover
-                                showTypeProps: {
-                                    // title: 'showType的title，空则显示空，无则显示label',
-                                    // width: 200
-                                },
-                                // fetchUrl: '',
-                                // fetchType: '',
-                                // submitUrl: '123',
-                                query: ["id"],
-                                params: { a: 1, b: 2 },
-                                positions: ["top", "row"],
-                                disabled: {
-                                    top: { $lte: 0 },
-                                },
-                            },
-                            {
-                                key: "delete",
-                                label: "删除",
-                                icon: "ri-close-circle-line",
-                                component: "confirm",
-                                // 这个配置不符合直觉
-                                confirmProps: {
-                                    // title: "确认删除吗?",
-                                    // message: "删除后无法恢复",
-                                },
-                                query: ["id"],
-                                positions: ["top", "row"],
-                                disabled: {
-                                    // top 按照选中数量去处理
-                                    top: {
-                                        $lte: 1,
-                                    },
-                                    // row 按照当前行关键字去处理
-                                    row: {
-                                        // and
-                                        id: { $eq: "aaa" },
-                                        name: { $eq: "22" },
-                                    },
-                                },
-                                props: {
-                                    type: "danger",
-                                    plain: true,
-                                },
-                            },
-                        ],
+                        // actions: [
+                        //     {
+                        //         key: "create",
+                        //         label: "创建",
+                        //         icon: "ri-add-circle-line",
+                        //         showType: 'slideover',
+                        //         component: "form",
+                        //         positions: ["top"],
+                        //         props: {
+                        //             type: "primary",
+                        //         },
+                        //     },
+                        //     {
+                        //         key: "edit",
+                        //         label: "编辑",
+                        //         icon: "ri-edit-line",
+                        //         component: "form",
+                        //         // showType: 'modal',  // slideover
+                        //         showTypeProps: {
+                        //             // title: 'showType的title，空则显示空，无则显示label',
+                        //             // width: 200
+                        //         },
+                        //         // fetchUrl: '',
+                        //         // fetchType: '',
+                        //         // submitUrl: '123',
+                        //         query: ["id"],
+                        //         params: { a: 1, b: 2 },
+                        //         positions: ["top", "row"],
+                        //         disabled: {
+                        //             top: { $lte: 0 },
+                        //         },
+                        //     },
+                        //     {
+                        //         key: "delete",
+                        //         label: "删除",
+                        //         icon: "ri-close-circle-line",
+                        //         component: "confirm",
+                        //         // 这个配置不符合直觉
+                        //         confirmProps: {
+                        //             // title: "确认删除吗?",
+                        //             // message: "删除后无法恢复",
+                        //         },
+                        //         query: ["id"],
+                        //         positions: ["top", "row"],
+                        //         disabled: {
+                        //             // top 按照选中数量去处理
+                        //             top: {
+                        //                 $lte: 1,
+                        //             },
+                        //             // row 按照当前行关键字去处理
+                        //             row: {
+                        //                 // and
+                        //                 id: { $eq: "aaa" },
+                        //                 name: { $eq: "22" },
+                        //             },
+                        //         },
+                        //         props: {
+                        //             type: "danger",
+                        //             plain: true,
+                        //         },
+                        //     },
+                        // ],
                     },
                     {
                         label: "组管理",
                         key: "group",
                         component: "dataTable",
-                        actions: [
-                            {
-                                key: "delete",
-                                label: "删除",
-                                icon: "ri-close-circle-line",
-                                component: "form",
-                                positions: ["row"],
-                                props: {
-                                    type: "danger",
-                                    plain: true,
-                                },
-                            },
-                        ],
+                        // actions: [
+                        //     {
+                        //         key: "delete",
+                        //         label: "删除",
+                        //         icon: "ri-close-circle-line",
+                        //         component: "form",
+                        //         positions: ["row"],
+                        //         props: {
+                        //             type: "danger",
+                        //             plain: true,
+                        //         },
+                        //     },
+                        // ],
                     },
                 ],
             },

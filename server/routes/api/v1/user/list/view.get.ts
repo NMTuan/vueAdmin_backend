@@ -2,7 +2,7 @@
  * @Author: nmtuan nmtuan@qq.com
  * @Date: 2024-09-04 05:41:21
  * @LastEditors: nmtuan nmtuan@qq.com
- * @LastEditTime: 2024-09-04 05:43:55
+ * @LastEditTime: 2024-09-05 15:54:25
  * @FilePath: \vueAdmin_backend\server\routes\api\v1\user\list\view.get.ts
  * @Description:
  *
@@ -14,6 +14,7 @@ export default defineAuthEventHandler(async (event) => {
         data: {
             id: "aaa",
             name: "11",
+            sex: 1,
             email: "henurdi@nucma.org",
             city: "Mejzupaj",
             cid: "1",
@@ -26,14 +27,53 @@ export default defineAuthEventHandler(async (event) => {
                 label: "编号",
                 // component: "detail",
                 // showType: 'modal',
-                // path: "/user/user/view",
+                // fetchUrl: "/user/user/view",
                 // query: ["id"],
             },
             { key: "name", label: "姓名" },
+            {
+                key: "sex",
+                label: "性别",
+                component: "enum",
+                options: [
+                    { label: "男", value: "1" },
+                    {
+                        label: "女",
+                        value: "2",
+                        props: {
+                            type: "danger",
+                        },
+                    },
+                    { label: "未知", value: "0" },
+                ],
+            },
             { key: "email", label: "邮箱" },
-            { key: "city", label: "城市" },
+            {
+                key: "city",
+                label: "城市",
+                component: "table",
+                // fetchUrl: "/user/list",
+                query: ["name"],
+                props: {
+                    // text: true,
+                    // type: 'primary'
+                },
+                showTypeProps: {
+                    title: "详情",
+                },
+            },
             { key: "cid", label: "城市编号" },
-            { key: "country", label: "国家" },
+            {
+                key: "country",
+                label: "国家",
+                component: "detail",
+                showType: "modal",
+                fetchUrl: "/user/list/view",
+                query: ["id"],
+                showTypeProps: {
+                    title: "详情",
+                },
+            },
         ],
     });
 });
